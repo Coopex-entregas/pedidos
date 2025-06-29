@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoopEX Entregas - Solicitação de Motoboy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0066cc, #00cc66);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 15px;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #0066cc;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            background: #0066cc;
+            border-radius: 50%;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .radio-item input[type="radio"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option:hover {
+            border-color: #0066cc;
+            background: #f0f7ff;
+        }
+
+        .payment-option input[type="radio"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .whatsapp-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .logo {
+                max-width: 150px;
+            }
+            
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .form-section.coleta {
+            border-left-color: #e74c3c;
+        }
+
+        .form-section.entrega {
+            border-left-color: #27ae60;
+        }
+
+        .form-section.pagamento {
+            border-left-color: #f39c12;
+        }
+
+        .form-section.tipo {
+            border-left-color: #9b59b6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="logo-coopex.png" alt="CoopEX Entregas" class="logo">
+            <h1>Solicitação de Motoboy</h1>
+            <p>Preencha os dados abaixo para solicitar nosso serviço</p>
+        </div>
+
+        <div class="form-container">
+            <form id="motoboyForm">
+                <!-- Seção Solicitante -->
+                <div class="form-section">
+                    <div class="section-title">👤 Dados do Solicitante</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nomeSolicitante">Nome Completo <span class="required">*</span></label>
+                            <input type="text" id="nomeSolicitante" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefoneSolicitante">Telefone <span class="required">*</span></label>
+                            <input type="tel" id="telefoneSolicitante" placeholder="(84) 99999-9999" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção Coleta -->
+                <div class="form-section coleta">
+                    <div class="section-title">📦 Dados da Coleta</div>
+                    <div class="form-group">
+                        <label for="enderecoColeta">Endereço de Coleta <span class="required">*</span></label>
+                        <textarea id="enderecoColeta" placeholder="Rua, número, bairro, cidade" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="referenciaColeta">Ponto de Referência</label>
+                        <input type="text" id="referenciaColeta" placeholder="Ex: Próximo ao supermercado, em frente à farmácia...">
+                    </div>
+                </div>
+
+                <!-- Seção Entrega -->
+                <div class="form-section entrega">
+                    <div class="section-title">🏠 Dados da Entrega</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nomeRecebedor">Nome do Recebedor <span class="required">*</span></label>
+                            <input type="text" id="nomeRecebedor" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefoneRecebedor">Telefone do Recebedor <span class="required">*</span></label>
+                            <input type="tel" id="telefoneRecebedor" placeholder="(84) 99999-9999" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="enderecoEntrega">Endereço de Entrega <span class="required">*</span></label>
+                        <textarea id="enderecoEntrega" placeholder="Rua, número, bairro, cidade" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="referenciaEntrega">Ponto de Referência</label>
+                        <input type="text" id="referenciaEntrega" placeholder="Ex: Próximo ao supermercado, em frente à farmácia...">
+                    </div>
+                </div>
+
+                <!-- Seção Pagamento -->
+                <div class="form-section pagamento">
+                    <div class="section-title">💳 Forma de Pagamento</div>
+                    <div class="payment-options">
+                        <label class="payment-option">
+                            <input type="radio" name="pagamento" value="dinheiro" required>
+                            <span>💵 Dinheiro</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="pagamento" value="pix" required>
+                            <span>📱 PIX</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="pagamento" value="comanda" required>
+                            <span>📋 Comanda</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Seção Tipo de Solicitação -->
+                <div class="form-section tipo">
+                    <div class="section-title">📋 Tipo de Solicitação</div>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="tipo" value="pedido" checked>
+                            <span>🚀 Pedido (Confirmar entrega)</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="tipo" value="orcamento">
+                            <span>💰 Orçamento (Apenas consultar preço)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                    </svg>
+                    Enviar para WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('motoboyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Capturar dados do formulário
+            const dados = {
+                nomeSolicitante: document.getElementById('nomeSolicitante').value.trim(),
+                telefoneSolicitante: document.getElementById('telefoneSolicitante').value.trim(),
+                enderecoColeta: document.getElementById('enderecoColeta').value.trim(),
+                referenciaColeta: document.getElementById('referenciaColeta').value.trim(),
+                nomeRecebedor: document.getElementById('nomeRecebedor').value.trim(),
+                telefoneRecebedor: document.getElementById('telefoneRecebedor').value.trim(),
+                enderecoEntrega: document.getElementById('enderecoEntrega').value.trim(),
+                referenciaEntrega: document.getElementById('referenciaEntrega').value.trim(),
+                pagamento: document.querySelector('input[name="pagamento"]:checked')?.value,
+                tipo: document.querySelector('input[name="tipo"]:checked')?.value
+            };
+
+            // Validar campos obrigatórios
+            const camposObrigatorios = [
+                'nomeSolicitante', 'telefoneSolicitante', 'enderecoColeta',
+                'nomeRecebedor', 'telefoneRecebedor', 'enderecoEntrega'
+            ];
+
+            for (let campo of camposObrigatorios) {
+                if (!dados[campo]) {
+                    alert('Por favor, preencha todos os campos obrigatórios!');
+                    return;
+                }
+            }
+
+            if (!dados.pagamento) {
+                alert('Por favor, selecione a forma de pagamento!');
+                return;
+            }
+
+            // Construir mensagem para WhatsApp
+            const tipoTexto = dados.tipo === 'orcamento' ? '💰 SOLICITAÇÃO DE ORÇAMENTO' : '🚀 PEDIDO DE MOTOBOY';
+            const pagamentoTexto = {
+                'dinheiro': '💵 Dinheiro',
+                'pix': '📱 PIX',
+                'comanda': '📋 Comanda'
+            };
+
+            let mensagem = `${tipoTexto}
+
+👤 *SOLICITANTE*
+Nome: ${dados.nomeSolicitante}
+Telefone: ${dados.telefoneSolicitante}
+
+📦 *COLETA*
+Endereço: ${dados.enderecoColeta}`;
+
+            if (dados.referenciaColeta) {
+                mensagem += `\nReferência: ${dados.referenciaColeta}`;
+            }
+
+            mensagem += `
+
+🏠 *ENTREGA*
+Nome do Recebedor: ${dados.nomeRecebedor}
+Telefone: ${dados.telefoneRecebedor}
+Endereço: ${dados.enderecoEntrega}`;
+
+            if (dados.referenciaEntrega) {
+                mensagem += `\nReferência: ${dados.referenciaEntrega}`;
+            }
+
+            mensagem += `
+
+💳 *PAGAMENTO*
+${pagamentoTexto[dados.pagamento]}
+
+---
+*CoopEX Entregas* 🏍️`;
+
+            // Enviar para WhatsApp
+            const numeroWhatsApp = '5584981110706';
+            const mensagemCodificada = encodeURIComponent(mensagem);
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
+            
+            window.open(urlWhatsApp, '_blank');
+        });
+
+        // Máscara para telefone
+        function aplicarMascaraTelefone(input) {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 11) {
+                    value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                } else if (value.length >= 7) {
+                    value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+                } else if (value.length >= 3) {
+                    value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+                }
+                e.target.value = value;
+            });
+        }
+
+        // Aplicar máscara nos campos de telefone
+        aplicarMascaraTelefone(document.getElementById('telefoneSolicitante'));
+        aplicarMascaraTelefone(document.getElementById('telefoneRecebedor'));
+    </script>
+</body>
+</html>
+
